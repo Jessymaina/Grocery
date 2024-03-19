@@ -143,7 +143,25 @@ if (mysqli_num_rows($result) > 0) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['MonthOfSale']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['YearOfSale']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['ItemSold']) . "</td>";
+                        echo "<td>";
+    
+    // Check if $row["ItemSold"] is not null and is a valid JSON string
+    if ($row["ItemSold"] !== null && ($items_sold = json_decode($row["ItemSold"], true)) !== null) {
+        echo "<table border='1'>";
+        echo "<tr><th>Product Name</th><th>Quantity</th><th>Total Price</th></tr>";
+        foreach ($items_sold as $item) {
+            echo "<tr>";
+            echo "<td>" . $item['productName'] . "</td>";
+            echo "<td>" . $item['quantity'] . "</td>";
+            echo "<td>$" . $item['totalPrice'] . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "Invalid data";
+    }
+    
+    echo "</td>";
                         echo "<td>" . htmlspecialchars($row['CustomerId']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['TotalAmount']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['PaymentType']) . "</td>";

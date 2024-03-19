@@ -901,7 +901,7 @@ $(document).ready(function() {
         var customerId = "test@gmail.com";
         var totalAmount= localStorage.getItem('totalamount');
         var paymentType = "Mpesa";
-        var paymentId = "WDVK23VJF83";
+        var paymentId = document.getElementById('txtmpesa').value;
 
         // AJAX request to send data to PHP script
         $.ajax({

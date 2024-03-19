@@ -11,7 +11,13 @@ if(isset($_SESSION['user_email'])) {
     $user_email = $_SESSION['user_email'];
 
     // Retrieve user's sales data from the database
-    $sql = "SELECT * FROM sales WHERE CustomerId = '$user_email'";
+   // $sql = "SELECT * FROM sales WHERE CustomerId = '$user_email'";
+   $sql = "SELECT * FROM sales 
+   WHERE CustomerId = '$user_email' 
+   ORDER BY COUNT DESC 
+   LIMIT 1";
+
+
     $result = mysqli_query($con, $sql);
 
     // Check if any data is returned
@@ -97,12 +103,30 @@ if(isset($_SESSION['user_email'])) {
                 <div class='container'>
                     <h1>Receipt</h1>
                     <table border='1'>
-                        <tr><th>Month</th><th>Year</th><th>Item Sold</th><th>Total Amount</th><th>Payment Type</th><th>Payment ID</th></tr>";
+                        <tr><th>Month</th><th>Year</th><th>Items bought             </th><th>Total Amount</th><th>Payment Type</th><th>Payment ID</th></tr>";
                         while($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
                             echo "<td>" . date("F", strtotime(($row["MonthOfSale"]) . "/1/" . $row["YearOfSale"])) . "</td>"; // Convert month number to month name
                             echo "<td>" . $row["YearOfSale"] . "</td>";
-                            echo "<td>" . $row["ItemSold"] . "</td>";
+                            echo "<td>";
+    
+                            // Check if $row["ItemSold"] is not null and is a valid JSON string
+                            if ($row["ItemSold"] !== null && ($items_sold = json_decode($row["ItemSold"], true)) !== null) {
+                                echo "<table border='1'>";
+                                echo "<tr><th>Product Name</th><th>Quantity</th><th>Total Price</th></tr>";
+                                foreach ($items_sold as $item) {
+                                    echo "<tr>";
+                                    echo "<td>" . $item['productName'] . "</td>";
+                                    echo "<td>" . $item['quantity'] . "</td>";
+                                    echo "<td>$" . $item['totalPrice'] . "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</table>";
+                            } else {
+                                echo "Invalid data";
+                            }
+                            
+                            echo "</td>";
                             echo "<td>" . $row["TotalAmount"] . "</td>";
                             echo "<td>" . $row["PaymentType"] . "</td>";
                             echo "<td>" . $row["PaymentId"] . "</td>";
@@ -118,6 +142,8 @@ if(isset($_SESSION['user_email'])) {
               echo "<a href='grocery.php' class='back-btn'>Back to Home</a>";
               
               echo "</div>
+
+              
                   </body>
                   </html>";
       
