@@ -153,7 +153,7 @@ if (mysqli_num_rows($result) > 0) {
             echo "<tr>";
             echo "<td>" . $item['productName'] . "</td>";
             echo "<td>" . $item['quantity'] . "</td>";
-            echo "<td>$" . $item['totalPrice'] . "</td>";
+            echo "<td>Kes : " . $item['totalPrice'] . "</td>";
             echo "</tr>";
         }
         echo "</table>";

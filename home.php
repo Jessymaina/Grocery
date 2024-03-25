@@ -71,8 +71,6 @@ require_once('connection.php');
         </nav>
         
         <div class="icons">
-            <div class="fas fa-bars" id="menu-btn"></div>
-            <div class="fas fa-search" id="search-btn"></div>
             <div  id="login-btn"> <a href="index.php" class="fas fa-user"></a></div>
         </div>
         <form action="" class="search-form">
@@ -140,7 +138,7 @@ require_once('connection.php');
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='product'>";
                 echo "<h3>" . $row["productname"] . "</h3>";
-                echo "<p>Price: $" . $row["productprice"] . "</p>";
+                echo "<p>Price: Kes: " . $row["productprice"] . "</p>";
                 echo "<p>Quantity: <span id='quantity-" . $row["productcode"] . "' class='itemsavailable'>" . $row["productquantity"] . "</span></p>";
                 echo "<p>Description: " . $row["productdescription"] . "</p>";
                 echo "<img src='" . $row["file"] . "' alt='" . $row["productname"] . "'>";

@@ -41,9 +41,9 @@ if(isset($_POST['addproduct'])) {
     if ($fileError === 0) {
         // Check if the file is already in the assets folder
         if (strpos($fileTmpName, $destinationFolder) === false) {
-            // Move the uploaded file to the assets folder
-            $fileDestination = $destinationFolder . $fileName;
-            move_uploaded_file($fileTmpName, $fileDestination);
+             // Move the uploaded file to the assets folder
+           $fileDestination = $destinationFolder . $fileName;
+             move_uploaded_file($fileTmpName, $fileDestination);
         } else {
             $fileDestination = $fileTmpName;
         }

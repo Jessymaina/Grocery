@@ -22,7 +22,9 @@ if(isset($_POST['submit'])) {
         echo "Please fill in all fields.";
     } else {
         // Get current date in YYYY-MM-DD format
+        date_default_timezone_set('Africa/Nairobi');
         $TODAY = date('Y-m-d');
+        //echo $today;
         // Assuming default status is 1
         $STATUS = 1;
 
@@ -426,8 +428,7 @@ if(isset($_POST['cartData'])) {
         </nav>
         
         <div class="icons">
-            <div class="fas fa-bars" id="menu-btn"></div>
-            <div class="fas fa-search" id="search-btn"></div>
+            <!--<div class="fas fa-bars" id="menu-btn"></div>-->
             <div class="fas fa-shopping-cart" id="cart-btn"><span id="itemsincart">0</span></div>
             <div class="user-menu">
     <div class="fas fa-user" id="login-btn"></div>
@@ -501,7 +502,7 @@ if(isset($_POST['cartData'])) {
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='product'>";
                 echo "<h3>" . $row["productname"] . "</h3>";
-                echo "<p>Price:Ksh " . $row["productprice"] . "</p>";
+                echo "<p>Price:Kes " . $row["productprice"] . "</p>";
                 echo "<p>Quantity: <span id='quantity-" . $row["productcode"] . "' class='itemsavailable'>" . $row["productquantity"] . "</span></p>";
                 echo "<p>Description: " . $row["productdescription"] . "</p>";
                 echo "<img src='" . $row["file"] . "' alt='" . $row["productname"] . "'>";
@@ -535,7 +536,7 @@ if(isset($_POST['cartData'])) {
         </div>
         <div id="cart-summary" style="margin: 20px;">
            
-            <p>Total: <span id="total">$0.00</span></p>
+            <p>Total: <span id="total">Kes 0.00</span></p>
             <input type="hidden" name="stktotal" id="stktotal" value="">
             <p>Date/Time: <span id="timestamp"></span></p>
            
@@ -647,7 +648,7 @@ if(isset($_POST['cartData'])) {
     <div class="container">
     <h2>Contact Us</h2>
     <p>For any inquiries or assistance, please feel free to contact us.</p>
-    <form id="myForm" action="respond.php" method="POST">  <!--removed respond.php in action -->
+    <form id="myForm" action="Grocery.php" method="POST">  <!--removed respond.php in action -->
     <div class="mb-3">
         <label for="NAME" class="form-label">Your Name</label>
         <input type="text" class="form-control" id="name" name="NAME" required>

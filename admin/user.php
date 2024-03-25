@@ -327,20 +327,7 @@ $result = mysqli_query($con, $sqlSelectUsers);
                 document.getElementById('deleteForm').submit();
             }
         }
-        function printReport() {
-       // window.print();
-       var divToPrint = document.getElementById('mytable');
-    var originalDisplay = divToPrint.style.display;
-
-    // Make the div visible before printing
-    divToPrint.style.display = 'block';
-
-    // Print the div content
-    window.print();
-
-    // Restore the original display property
-    divToPrint.style.display = originalDisplay;
-    }
+ 
     </script>
 </head>
 <body>
